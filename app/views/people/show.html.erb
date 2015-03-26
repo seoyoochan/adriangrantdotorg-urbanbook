@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<!-- If there's a nil error then it's the first creation -->
+ <% if @last_change && @last_change.whodunnit || nil %>
+        <strong>Last Update by User ID:</strong> <%= @id_who_made_the_change %> 
+      <% else %> 
+        <strong>First Creation By User ID:</strong> <%= @person.user_id %>
+       <% end %>
+
+<p>
+  <h2>Tags:</h2>
+
+<% @person.tags.any? %> 
+  <% @person.tags.each do |tag| %> 
+    <%= link_to tag.name, tag_path(tag) %>
+ <% end %>
+</p>
+
+<hr>
+<p>
+  <strong>Name:</strong>
+  <%= @person.name %>
+</p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @person.twitter %>
+</p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @person.facebook %>
+</p>
+
+<p>
+  <strong>Instagram:</strong>
+  <%= @person.instagram %>
+</p>
+
+<p>
+  <strong>Vine:</strong>
+  <%= @person.vine %>
+</p>
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>

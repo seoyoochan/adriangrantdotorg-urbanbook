@@ -1,0 +1,23 @@
+<h1>Tag#show</h1>
+<p>Find me in app/views/tag/show.html.erb</p>
+
+
+<h1>People Tagged as <%= @tag.name %></h1>
+
+<% if @people.count > 0 %>
+
+  <ul>
+
+  <% @people.each do |person| %>
+
+    <li><%= link_to person.name, person_path(person) %></li>
+
+  <% end %>
+
+  </ul>
+
+<% else %>
+
+  <p>This tag is not associated with any people.</p>
+
+<% end %>

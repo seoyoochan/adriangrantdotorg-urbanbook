@@ -1,0 +1,52 @@
+<h1>Listing people</h1>
+
+<h2>Tag Cloud</h2>
+<% tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+  <%= link_to tag.name, tag_path(tag), :class => css_class %>
+<% end %>
+
+
+<br/>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Twitter</th>
+      <th>Facebook</th>
+      <th>Instagram</th>
+      <th>Vine</th>
+      <th>Created By User ID</th>
+      <th>Tags</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.twitter %></td>
+        <td><%= person.facebook %></td>
+        <td><%= person.instagram %></td>
+        <td><%= person.vine %></td>
+        <td><%= person.user_id %></td>
+        <td><%= person.tag_list %></td>
+
+        <td><%= link_to 'Show', person %></td>
+
+        <!-- Show Edit/Delete only to Logged In Users -->
+        <% if current_user %>
+          <td><%= link_to 'Edit', edit_person_path(person) %></td>
+          <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user_signed_in? %>
+<%= link_to 'New Person', new_person_path %>
+<% end %>
